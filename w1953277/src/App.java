@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -203,6 +204,7 @@ public class App {
     private static void viewCustomersSortedAlphabetically() throws InterruptedException, IOException {
         clearConsole();
         List<Customer> allCustomers = new ArrayList<>();
+        List<String> customersName = new ArrayList<>();
         for (FoodQueue queue : queues) {
             allCustomers.addAll(queue.getCustomers());
         }
@@ -211,13 +213,17 @@ public class App {
             System.out.println("No customers in the queues.");
             return;
         }
+        System.out.println(allCustomers.get(0).getFullName());
 
-        Customer[] customersArray = allCustomers.toArray(new Customer[0]);
-        Arrays.sort(customersArray);
+
+        allCustomers.forEach(customer->customersName.add(customer.getFullName()));
+
+        Collections.sort(customersName);
+
 
         System.out.println("Customers Sorted in alphabetical order:");
-        for (Customer customer : customersArray) {
-            System.out.println(customer.getFullName());
+        for (String customer : customersName) {
+            System.out.println(customer);
         }
     }
 
